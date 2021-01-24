@@ -1,0 +1,110 @@
+<html lang="en">
+    <head>
+        <title>Rent Vs Buy Analysis</title>
+        
+        <link rel="stylesheet" href="./css/styles.css" />
+    </head>
+    <body>
+        <div class="card">
+            <h2>Rent Vs Buy Analysis</h2>
+            <table>
+                <tr>
+                    <th>SALES PRICE</th>
+                    <td><input id="sales-price" type="text" class="med" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" title="Currency Format ie. $500,000.00" /></td>
+                </tr>
+                <tr>
+                    <th>% DOWN</th>
+                    <td><input id="percent-down" type="text" class="med" pattern="[0-9]+(\.[0-9]{1,2})?%?" title="Percent Format ie. 5.00%" /></td>
+                </tr>
+                <tr>
+                    <th># OF YEARS</th>
+                    <td><input id="number-of-years" type="number" class="sm" title="Number of years" min=1 max=100 /></td>
+                </tr>
+                <tr>
+                    <th>INTEREST RATE</th>
+                    <td><input id="interest-rate" type="text" class="med" pattern="[0-9]+(\.[0-9]{1,2})?%?" title="Current Interest Rate ie. 2.25%" value="2.25%" /></td>
+                </tr>
+                <tr>
+                    <th>TERM (YEARS)</th>
+                    <td><input id="term" type="number" class="sm" title="Term in years" value=30 /></td>
+                </tr>
+                <tr>
+                    <th># OF PAYMENTS</th>
+                    <td><input id="number-of-payments" class="sm" type="number" title="Number of payments" value=360 /></td>
+                </tr>
+                <tr>
+                    <td><button onclick="calculate();">Calculate</button></td>
+                </tr>
+            </table>
+                
+            <div id="results" style="display: none;" >
+                <hr />
+                <h2>Results</h2>
+                <table>
+                    <tr>
+                        <th>DOWN PAYMENT</th>
+                        <td><input id="down-payment" type="text" class="lrg" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th>LOAN AMOUNT</th>
+                        <td><input id="loan-amount" type="text" class="lrg" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th>PI (PRINCIPAL & INTERST)</th>
+                        <td><input id="pi" type="text" class="lrg" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th>TAXES /YEAR</th>
+                        <td><input id="taxes-per-year" type="text" class="lrg" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th>TAXES /MONTH</th>
+                        <td><input id="taxes-per-month" type="text" class="lrg" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th>INSURANCE</th>
+                        <td><input id="insurance" type="text" class="lrg" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th>MORTGAGE INSURANCE</th>
+                        <td><input id="mortgage-insurance" type="text" class="lrg" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th>HOA FEE</th>
+                        <td><input id="hoa-fee" type="text" class="lrg" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th>PITI MONTHLY</th>
+                        <td><input id="pi-ti" type="text" class="lrg" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th>YEARLY APPRECIATION %</th>
+                        <td><input id="yearly-appreciation" type="text" class="lrg" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th>APPRECIATION</th>
+                        <td><input id="appreciation" type="text" class="lrg" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th>TOTAL YEARS</th>
+                        <td><input id="total-years" type="text" class="lrg" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th>ESTIMATED VALUE</th>
+                        <td><input id="estimated-value" type="text" class="lrg" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th>REMAINING BALANCE</th>
+                        <td><input id="remaining-balance" type="text" class="lrg" readonly /></td>
+                    </tr>
+                    <tr>
+                        <th>EQUITY</th>
+                        <td><input id="equity" type="text" class="lrg" readonly /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="./js/main.js"></script>
+    </body>
+</html>

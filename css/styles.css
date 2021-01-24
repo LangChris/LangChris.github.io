@@ -1,0 +1,38 @@
+body { background: #eee; }
+
+.card {
+    background: #fff;
+    width: 500px;
+    min-height: 200px;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+}
+
+h2 {
+    text-align: center;
+}
+
+table {
+    padding: 10px;
+    width: 500px;
+}
+
+th {
+    text-align: left;
+    width: 40%;
+}
+
+.sm {
+    width: 50px;
+}
+
+.med {
+    width: 150px;
+}
+
+.lrg {
+    width: 100%;
+}
