@@ -20,17 +20,15 @@ function calculate() {
     document.getElementById('estimated-value').value = '$' + convertToCurrency(outputObject.estimatedValue);
     document.getElementById('remaining-balance').value = '$' + convertToCurrency(outputObject.remainingBalance);
     document.getElementById('equity').value = '$' + convertToCurrency(outputObject.equity);
-    
-    document.getElementById('results').style.display = 'block';
 }    
         
 function getInputObject() {
     let salesPrice = document.getElementById('sales-price').value;
     let percentDown = document.getElementById('percent-down').value;
-    let numOfYears = document.getElementById('number-of-years').value;
+    let numOfYears = 5;
     let interestRate = document.getElementById('interest-rate').value;
-    let term = document.getElementById('term').value;
-    let numOfPayments = document.getElementById('number-of-payments').value;
+    let term = document.getElementById('program').value;
+    let numOfPayments = 12 * +term;
     salesPrice = salesPrice.replace('$', '');
     salesPrice = salesPrice.replace(',', '');
     percentDown = percentDown.replace('%', '');

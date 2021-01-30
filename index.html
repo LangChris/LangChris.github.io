@@ -1,105 +1,174 @@
 <html lang="en">
     <head>
-        <title>Rent Vs Buy Analysis</title>
+        <title>Home Purchase Scenario</title>
         
         <link rel="stylesheet" href="./css/styles.css" />
     </head>
     <body>
-        <div class="card">
-            <h2>Rent Vs Buy Analysis</h2>
-            <table>
-                <tr>
-                    <th>SALES PRICE</th>
-                    <td><input id="sales-price" type="text" class="med" pattern="^\\$?(([1-9](\\d*|\\d{0,2}(,\\d{3})*))|0)(\\.\\d{1,2})?$" title="Currency Format ie. $500,000.00" /></td>
-                </tr>
-                <tr>
-                    <th>% DOWN</th>
-                    <td><input id="percent-down" type="text" class="med" pattern="[0-9]+(\.[0-9]{1,2})?%?" title="Percent Format ie. 5.00%" /></td>
-                </tr>
-                <tr>
-                    <th># OF YEARS</th>
-                    <td><input id="number-of-years" type="number" class="sm" title="Number of years" min=1 max=100 /></td>
-                </tr>
-                <tr>
-                    <th>INTEREST RATE</th>
-                    <td><input id="interest-rate" type="text" class="med" pattern="[0-9]+(\.[0-9]{1,2})?%?" title="Current Interest Rate ie. 2.25%" value="2.25%" /></td>
-                </tr>
-                <tr>
-                    <th>TERM (YEARS)</th>
-                    <td><input id="term" type="number" class="sm" title="Term in years" value=30 /></td>
-                </tr>
-                <tr>
-                    <th># OF PAYMENTS</th>
-                    <td><input id="number-of-payments" class="sm" type="number" title="Number of payments" value=360 /></td>
-                </tr>
-                <tr>
-                    <td><button onclick="calculate();">Calculate</button></td>
-                </tr>
-            </table>
-                
-            <div id="results" style="display: none;" >
-                <hr />
-                <h2>Results</h2>
-                <table>
+        <div class="container">
+            <div class="section" id="header">
+                <div id="logo"></div>
+                <h2>Virginia Home Purchase Scenario</h2>
+            </div>
+            <div class="section">
+                <div class="half-section">
+                    <table id="buyer-info">
+                        <tr>
+                            <th>Buyer Name:</th>
+                            <td><input id="buyer-name" type="text" class="lrg" placeholder="John Doe" title="Enter buyers name here" /></td>
+                        </tr>
+                        <tr>
+                            <th>Subject Property:</th>
+                            <td><input id="subject-property" type="text" class="lrg" placeholder="123 Main St." title="Enter subject property here" /></td>
+                        </tr>
+                        <tr>
+                            <th>City, State, Zip:</th>
+                            <td>
+                                <input id="subject-property-city" type="text" class="med" placeholder="Centreville" title="Enter subject property city here" />
+                                <input id="subject-property-state" type="text" class="sm" placeholder="VA" title="Enter subject property state here" />
+                                <input id="subject-property-zip" type="text" class="sm" placeholder="20120" title="Enter subject property zip here" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="half-section">
+                    <table class="right" id="price-info">
+                        <tr>
+                            <th>Sales Price:</th>
+                            <td><input id="sales-price" type="text" class="med" placeholder="$600,000" title="Enter sales price here" /></td>
+                        </tr>
+                        <tr>
+                            <th>% Down:</th>
+                            <td><input id="percent-down" type="text" class="med" placeholder="20%" title="Enter percent down here" /></td>
+                        </tr>
+                        <tr>
+                            <th>Interest Rate:</th>
+                            <td><input id="interest-rate" type="text" class="med" placeholder="2.25%" title="Enter current interest rate here" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="section">
+                <div class="half-section">
+                    <table id="loan-info">
+                        <tr>
+                            <th>Loan Type:</th>
+                            <td>
+                                <select id="loan-type">
+                                    <option value="conventional" selected>CONVENTIONAL</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Rate Type:</th>
+                            <td>
+                                <select id="rate-type">
+                                    <option value="fixed" selected>FIXED</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Program:</th>
+                            <td>
+                                <select id="program">
+                                    <option value="30" selected>30 Yr. Fixed</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <p>FICO assured @ 760</p>
+                </div>
+            </div>
+            <div class="section">
+                <p class="sm-text">The information below reflects a summary of a loan scenario for which you have expressed an interest.</p>
+            </div>
+            <div class="section">
+                <button onclick="calculate();">Calculate</button>
+                <div class="half-section">
+                    <table>
+                        <tr>
+                            <th>Down Payment:</th>
+                            <td><input id="down-payment" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Loan Amount:</th>
+                            <td><input id="loan-amount" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>PI (Principal & Interest)</th>
+                            <td><input id="pi" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Taxes /Year</th>
+                            <td><input id="taxes-per-year" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Taxes /Month</th>
+                            <td><input id="taxes-per-month" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Insurance</th>
+                            <td><input id="insurance" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Mortgage Insurance</th>
+                            <td><input id="mortgage-insurance" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>HOA Fee</th>
+                            <td><input id="hoa-fee" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="half-section">
+                    <table>
+                        <tr>
+                            <th>PITI Monthly</th>
+                            <td><input id="pi-ti" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Yearly Appreciation %</th>
+                            <td><input id="yearly-appreciation" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Appreciation</th>
+                            <td><input id="appreciation" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Total Years</th>
+                            <td><input id="total-years" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Estimated Value</th>
+                            <td><input id="estimated-value" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Remaining Balance</th>
+                            <td><input id="remaining-balance" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Equity</th>
+                            <td><input id="equity" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="section">
+                <p class="sm-text"><strong>* Disclaimer</strong> more disclaimer info here.</p>
+            </div>
+            <div class="section">
+                <p class="lrg-text"><strong>THE INFORMATION PROVIDED ABOVE IS FOR DISCUSSION PURPOSES ONLY</strong></p>
+                <p class="lrg-text"><strong>IF YOU WISH TO PROCEED WITH A LOAN SIMILAR TO THE ONE ABOVE,</strong></p>
+                <p class="lrg-text"><strong>PLEASE CONTACT:</strong></p>
+                <table class="centered-tbl">
                     <tr>
-                        <th>DOWN PAYMENT</th>
-                        <td><input id="down-payment" type="text" class="lrg" readonly /></td>
+                        <td>Ed Lang - Real Estate Expert</td>
                     </tr>
                     <tr>
-                        <th>LOAN AMOUNT</th>
-                        <td><input id="loan-amount" type="text" class="lrg" readonly /></td>
+                        <td><strong>Office: </strong>703.932.5753</td>
                     </tr>
                     <tr>
-                        <th>PI (PRINCIPAL & INTERST)</th>
-                        <td><input id="pi" type="text" class="lrg" readonly /></td>
-                    </tr>
-                    <tr>
-                        <th>TAXES /YEAR</th>
-                        <td><input id="taxes-per-year" type="text" class="lrg" readonly /></td>
-                    </tr>
-                    <tr>
-                        <th>TAXES /MONTH</th>
-                        <td><input id="taxes-per-month" type="text" class="lrg" readonly /></td>
-                    </tr>
-                    <tr>
-                        <th>INSURANCE</th>
-                        <td><input id="insurance" type="text" class="lrg" readonly /></td>
-                    </tr>
-                    <tr>
-                        <th>MORTGAGE INSURANCE</th>
-                        <td><input id="mortgage-insurance" type="text" class="lrg" readonly /></td>
-                    </tr>
-                    <tr>
-                        <th>HOA FEE</th>
-                        <td><input id="hoa-fee" type="text" class="lrg" readonly /></td>
-                    </tr>
-                    <tr>
-                        <th>PITI MONTHLY</th>
-                        <td><input id="pi-ti" type="text" class="lrg" readonly /></td>
-                    </tr>
-                    <tr>
-                        <th>YEARLY APPRECIATION %</th>
-                        <td><input id="yearly-appreciation" type="text" class="lrg" readonly /></td>
-                    </tr>
-                    <tr>
-                        <th>APPRECIATION</th>
-                        <td><input id="appreciation" type="text" class="lrg" readonly /></td>
-                    </tr>
-                    <tr>
-                        <th>TOTAL YEARS</th>
-                        <td><input id="total-years" type="text" class="lrg" readonly /></td>
-                    </tr>
-                    <tr>
-                        <th>ESTIMATED VALUE</th>
-                        <td><input id="estimated-value" type="text" class="lrg" readonly /></td>
-                    </tr>
-                    <tr>
-                        <th>REMAINING BALANCE</th>
-                        <td><input id="remaining-balance" type="text" class="lrg" readonly /></td>
-                    </tr>
-                    <tr>
-                        <th>EQUITY</th>
-                        <td><input id="equity" type="text" class="lrg" readonly /></td>
+                        <td><strong>Email: </strong>edlang@edlang.com</td>
                     </tr>
                 </table>
             </div>
