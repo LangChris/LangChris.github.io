@@ -5,6 +5,7 @@ function calculate() {
     let outputObject = getOutputObject(inputObject);
     console.log(outputObject);
 
+    document.getElementById('sales-price-value').value = '$' + convertToCurrency(outputObject.salesPrice);
     document.getElementById('down-payment').value = '$' + convertToCurrency(outputObject.downPayment);
     document.getElementById('loan-amount').value = '$' + convertToCurrency(outputObject.loanAmount);
     document.getElementById('pi').value = '$' + convertToCurrency(outputObject.pi);
@@ -16,18 +17,35 @@ function calculate() {
     document.getElementById('pi-ti').value = '$' + convertToCurrency(outputObject.piTi);
     document.getElementById('yearly-appreciation').value = +(outputObject.yearlyAppreciation * 100).toFixed(2) + '%';
     document.getElementById('appreciation').value = '$' + convertToCurrency(outputObject.appreciation);
-    document.getElementById('total-years').value = outputObject.numOfYears;
+    document.getElementById('total-years-value').value = outputObject.numOfYears;
     document.getElementById('estimated-value').value = '$' + convertToCurrency(outputObject.estimatedValue);
     document.getElementById('remaining-balance').value = '$' + convertToCurrency(outputObject.remainingBalance);
     document.getElementById('equity').value = '$' + convertToCurrency(outputObject.equity);
 }    
+
+function updateInterestRate(event) {
+    let value = event.target.options[event.target.options.selectedIndex].value;
+    let interestRate = document.getElementById('interest-rate');
+
+    switch(value) {
+        case '30': interestRate.value = '2.75%'; break;
+        case '15': interestRate.value = '2.25%'; break;
+    }
+}
+
+function updateTotalYearsLabel(event) {
+    let value = event.target.value;
+    let totalYearsLabel = document.getElementById('total-years-label');
+
+    totalYearsLabel.innerHTML = value;
+}
         
 function getInputObject() {
     let salesPrice = document.getElementById('sales-price').value;
     let percentDown = document.getElementById('percent-down').value;
-    let numOfYears = 5;
+    let numOfYears = document.getElementById('total-years').value;
     let interestRate = document.getElementById('interest-rate').value;
-    let term = document.getElementById('program').value;
+    let term = document.getElementById('loan-type').value;
     let numOfPayments = 12 * +term;
     salesPrice = salesPrice.replace('$', '');
     salesPrice = salesPrice.replace(',', '');
@@ -50,14 +68,23 @@ function getOutputObject(inputObject) {
     let downPayment = +(inputObject.salesPrice * inputObject.percentDown).toFixed(2);
     let loanAmount = +(inputObject.salesPrice - downPayment).toFixed(2);
     let pi = +PMT(inputObject.interestRate/12,inputObject.numOfPayments, loanAmount).toFixed(2);
-    let taxesPerYear = +(inputObject.salesPrice * 0.01).toFixed(2);
+    let taxesPerYear = +(inputObject.salesPrice * constants.yearlyTaxesRate).toFixed(2);
     let taxesPerMonth = +(taxesPerYear / 12).toFixed(2);
     let appreciation = +(inputObject.salesPrice * constants.yearlyAppreciation).toFixed(2);
     
-    let piTi = +(pi + taxesPerMonth + constants.insurance + constants.mortgageInsurance + constants.hoaFee).toFixed(2);
     let estimatedValue = +(inputObject.salesPrice * Math.pow(1 + constants.yearlyAppreciation, inputObject.numOfYears)).toFixed(2);
     let remainingBalance = 416000;
     let equity = +(estimatedValue - remainingBalance).toFixed(2);
+    let insurance = +(inputObject.salesPrice * constants.insuranceRate).toFixed(2);
+    let mortgageInsurance;
+    if(inputObject.percentDown >= 0.2) {
+       mortgageInsurance = 0;
+    } else if(inputObject.percentDown < 10) {
+       mortgageInsurance = +(.00041 * inputObject.salesPrice).toFixed(2);
+    } else {
+        mortgageInsurance = +(.00075 * inputObject.salesPrice).toFixed(2);
+    }
+    let piTi = +(pi + taxesPerMonth + insurance + mortgageInsurance + constants.hoaFee).toFixed(2);
     
     let outputObject = {
         downPayment: downPayment,
@@ -69,7 +96,9 @@ function getOutputObject(inputObject) {
         appreciation: appreciation,
         estimatedValue: estimatedValue,
         remainingBalance: remainingBalance,
-        equity: equity
+        equity: equity,
+        insurance: insurance,
+        mortgageInsurance: mortgageInsurance
     };
     
     Object.assign(outputObject, constants);
@@ -91,9 +120,9 @@ function PMT(ir,np, pv, fv = 0) {
 
 function getConstantVariables() {
     return {
-        insurance: 100.00,
-        mortgageInsurance: 100.00,
-        hoaFee: 75.00,
+        insuranceRate: 0.002,
+        yearlyTaxesRate: 0.01,
+        hoaFee: 80.00,
         yearlyAppreciation: .02
     };
 }
