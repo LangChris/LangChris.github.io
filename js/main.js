@@ -79,7 +79,7 @@ function getOutputObject(inputObject) {
     let mortgageInsurance;
     if(inputObject.percentDown >= 0.2) {
        mortgageInsurance = 0;
-    } else if(inputObject.percentDown < 10) {
+    } else if(inputObject.percentDown < 0.1) {
        mortgageInsurance = +((.00041 * inputObject.salesPrice) / 12).toFixed(2);
     } else {
         mortgageInsurance = +((.00075 * inputObject.salesPrice) / 12).toFixed(2);
