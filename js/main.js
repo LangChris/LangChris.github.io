@@ -75,7 +75,7 @@ function getOutputObject(inputObject) {
     let estimatedValue = +(inputObject.salesPrice * Math.pow(1 + constants.yearlyAppreciation, inputObject.numOfYears)).toFixed(2);
     let remainingBalance = 416000;
     let equity = +(estimatedValue - remainingBalance).toFixed(2);
-    let insurance = +(inputObject.salesPrice * constants.insuranceRate).toFixed(2);
+    let insurance = +(inputObject.salesPrice * constants.insuranceRate / 12).toFixed(2);
     let mortgageInsurance;
     if(inputObject.percentDown >= 0.2) {
        mortgageInsurance = 0;
