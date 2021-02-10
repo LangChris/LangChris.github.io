@@ -45,15 +45,25 @@
                     <table id="price-info">
                         <tr>
                             <th>Sales Price:</th>
-                            <td><input id="sales-price" type="text" class="med" placeholder="$600,000" title="Enter sales price here" /></td>
+                            <td><input id="sales-price" type="text" class="med" placeholder="$500,000" title="Enter sales price here" /></td>
+                        </tr>
+                        <tr>
+                            <th>HOA or Condo Fee:</th>
+                            <td><input id="hoa-fee" type="text" class="med" placeholder="$80" title="Enter hoa or condo fee here" value="$80.00" /></td>
                         </tr>
                         <tr>
                             <th>% Down:</th>
-                            <td><input id="percent-down" type="text" class="med" placeholder="20%" title="Enter percent down here" /></td>
+                            <td>
+                                <input id="percent-down" type="range" value=5 min=0 max=30 step=1 oninput="updatePercentDownLabel(event)" />
+                                <span id="percent-down-label" class="range-label">5%</span>
+                            </td>
                         </tr>
                         <tr>
                             <th>Total Years:</th>
-                            <td><input id="total-years" type="range" value=5 min=1 max=30 step=1 oninput="updateTotalYearsLabel(event)" /><span id="total-years-label">5</span></td>
+                            <td>
+                                <input id="total-years" type="range" value=5 min=1 max=30 step=1 oninput="updateTotalYearsLabel(event)" />
+                                <span id="total-years-label" class="range-label">5 years</span>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -70,7 +80,7 @@
                         </tr>
                         <tr>
                             <th>Interest Rate:</th>
-                            <td><input id="interest-rate" type="text" class="sm readonly" value="2.75%" readonly /></td>
+                            <td><input id="interest-rate" type="text" class="med-sm readonly" value="2.75%" readonly /></td>
                         </tr>
                     </table>
                 </div>
@@ -112,8 +122,8 @@
                             <td><input id="mortgage-insurance" type="text" class="lrg readonly" readonly /></td>
                         </tr>
                         <tr>
-                            <th>HOA Fee:</th>
-                            <td><input id="hoa-fee" type="text" class="lrg readonly" readonly /></td>
+                            <th>HOA or Condo Fee:</th>
+                            <td><input id="hoa-fee-value" type="text" class="lrg readonly" readonly /></td>
                         </tr>
                     </table>
                 </div>

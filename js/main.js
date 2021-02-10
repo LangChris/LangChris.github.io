@@ -13,7 +13,7 @@ function calculate() {
     document.getElementById('taxes-per-month').value = '$' + convertToCurrency(outputObject.taxesPerMonth);
     document.getElementById('insurance').value = '$' + convertToCurrency(outputObject.insurance);
     document.getElementById('mortgage-insurance').value = '$' + convertToCurrency(outputObject.mortgageInsurance);
-    document.getElementById('hoa-fee').value = '$' + convertToCurrency(outputObject.hoaFee);
+    document.getElementById('hoa-fee-value').value = '$' + convertToCurrency(outputObject.hoaFee);
     document.getElementById('pi-ti').value = '$' + convertToCurrency(outputObject.piTi);
     document.getElementById('yearly-appreciation').value = +(outputObject.yearlyAppreciation * 100).toFixed(2) + '%';
     document.getElementById('appreciation').value = '$' + convertToCurrency(outputObject.appreciation);
@@ -37,7 +37,14 @@ function updateTotalYearsLabel(event) {
     let value = event.target.value;
     let totalYearsLabel = document.getElementById('total-years-label');
 
-    totalYearsLabel.innerHTML = value;
+    totalYearsLabel.innerHTML = value + ' years';
+}
+
+function updatePercentDownLabel(event) {
+    let value = event.target.value;
+    let percentDownLabel = document.getElementById('percent-down-label');
+
+    percentDownLabel.innerHTML = value + '%';
 }
         
 function getInputObject() {
@@ -46,14 +53,17 @@ function getInputObject() {
     let numOfYears = document.getElementById('total-years').value;
     let interestRate = document.getElementById('interest-rate').value;
     let term = document.getElementById('loan-type').value;
+    let hoaFee = document.getElementById('hoa-fee').value;
     let numOfPayments = 12 * +term;
     salesPrice = salesPrice.replace('$', '');
     salesPrice = salesPrice.replace(',', '');
+    hoaFee = hoaFee.replace('$', '');
     percentDown = percentDown.replace('%', '');
     interestRate = interestRate.replace('%', '');
     
     return {
         salesPrice: +salesPrice,
+        hoaFee: +hoaFee,
         percentDown: +percentDown / 100,
         numOfYears: +numOfYears,
         interestRate: +interestRate / 100,
@@ -84,7 +94,7 @@ function getOutputObject(inputObject) {
     } else {
         mortgageInsurance = +(.00075 * inputObject.salesPrice).toFixed(2);
     }
-    let piTi = +(pi + taxesPerMonth + insurance + mortgageInsurance + constants.hoaFee).toFixed(2);
+    let piTi = +(pi + taxesPerMonth + insurance + mortgageInsurance + inputObject.hoaFee).toFixed(2);
     
     let outputObject = {
         downPayment: downPayment,
@@ -122,7 +132,6 @@ function getConstantVariables() {
     return {
         insuranceRate: 0.002,
         yearlyTaxesRate: 0.01,
-        hoaFee: 80.00,
         yearlyAppreciation: .02
     };
 }

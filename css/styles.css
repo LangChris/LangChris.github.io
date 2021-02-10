@@ -84,10 +84,20 @@ th {
     width: 50px;
 }
 
+.med-sm {
+    width: 100px;
+}
+
 .med {
     width: 125px;
 }
 
 .lrg {
     width: 100%;
+}
+
+.range-label {
+    color: #003497;
+    font-size: 20px;
+    font-weight: bold;
 }
