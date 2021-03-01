@@ -1,9 +1,6 @@
 function calculate() {
-    console.log('calculating...');
-
     let inputObject = getInputObject();
     let outputObject = getOutputObject(inputObject);
-    console.log(outputObject);
 
     document.getElementById('sales-price-value').value = '$' + convertToCurrency(outputObject.salesPrice);
     document.getElementById('down-payment').value = '$' + convertToCurrency(outputObject.downPayment);
@@ -19,8 +16,8 @@ function calculate() {
     document.getElementById('appreciation').value = '$' + convertToCurrency(outputObject.appreciation);
     document.getElementById('total-years-value').value = outputObject.numOfYears;
     document.getElementById('estimated-value').value = '$' + convertToCurrency(outputObject.estimatedValue);
-    document.getElementById('remaining-balance').value = '$' + convertToCurrency(outputObject.remainingBalance);
-    document.getElementById('equity').value = '$' + convertToCurrency(outputObject.equity);
+//    document.getElementById('remaining-balance').value = '$' + convertToCurrency(outputObject.remainingBalance);
+//    document.getElementById('equity').value = '$' + convertToCurrency(outputObject.equity);
 }    
 
 function updateInterestRate(event) {
