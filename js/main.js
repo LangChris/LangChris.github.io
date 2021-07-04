@@ -1,7 +1,7 @@
 function calculate() {
     let inputObject = getInputObject();
     let outputObject = getOutputObject(inputObject);
-
+    console.log(outputObject);
     document.getElementById('sales-price-value').value = '$' + convertToCurrency(outputObject.salesPrice);
     document.getElementById('down-payment').value = '$' + convertToCurrency(outputObject.downPayment);
     document.getElementById('loan-amount').value = '$' + convertToCurrency(outputObject.loanAmount);
@@ -16,8 +16,8 @@ function calculate() {
     document.getElementById('appreciation').value = '$' + convertToCurrency(outputObject.appreciation);
     document.getElementById('total-years-value').value = outputObject.numOfYears;
     document.getElementById('estimated-value').value = '$' + convertToCurrency(outputObject.estimatedValue);
-//    document.getElementById('remaining-balance').value = '$' + convertToCurrency(outputObject.remainingBalance);
-//    document.getElementById('equity').value = '$' + convertToCurrency(outputObject.equity);
+    document.getElementById('remaining-balance').value = '$' + convertToCurrency(outputObject.remainingBalance.toFixed(2));
+    document.getElementById('equity').value = '$' + convertToCurrency(outputObject.equity);
 }    
 
 function updateInterestRate(event) {
@@ -80,7 +80,7 @@ function getOutputObject(inputObject) {
     let appreciation = +(inputObject.salesPrice * constants.yearlyAppreciation).toFixed(2);
     
     let estimatedValue = +(inputObject.salesPrice * Math.pow(1 + constants.yearlyAppreciation, inputObject.numOfYears)).toFixed(2);
-    let remainingBalance = 416000;
+    let remainingBalance = +REMBAL(pi, inputObject.interestRate/12, inputObject.numOfPayments - (inputObject.numOfYears * 12));
     let equity = +(estimatedValue - remainingBalance).toFixed(2);
     let insurance = +((inputObject.salesPrice * constants.insuranceRate) / 12).toFixed(2);
     let mortgageInsurance;
@@ -123,6 +123,10 @@ function PMT(ir,np, pv, fv = 0) {
  var presentValueInterstFector = Math.pow((1 + ir), np);
  var pmt = ir * pv  * (presentValueInterstFector + fv)/(presentValueInterstFector-1); 
  return pmt;
+}
+
+function REMBAL(pmt, i, n) {
+    return pmt * ((1 - (1 / Math.pow(1 + i, n))) / i);
 }
 
 function getConstantVariables() {
