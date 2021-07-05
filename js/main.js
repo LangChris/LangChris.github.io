@@ -87,9 +87,9 @@ function getOutputObject(inputObject) {
     if(inputObject.percentDown >= 0.2) {
        mortgageInsurance = 0;
     } else if(inputObject.percentDown < 0.1) {
-       mortgageInsurance = +(.00041 * inputObject.salesPrice).toFixed(2);
+       mortgageInsurance = +(.00075 * inputObject.salesPrice).toFixed(2);
     } else {
-        mortgageInsurance = +(.00075 * inputObject.salesPrice).toFixed(2);
+        mortgageInsurance = +(.00041 * inputObject.salesPrice).toFixed(2);
     }
     let piTi = +(pi + taxesPerMonth + insurance + mortgageInsurance + inputObject.hoaFee).toFixed(2);
     
