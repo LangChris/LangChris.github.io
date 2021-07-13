@@ -41,7 +41,6 @@ function updateEmailResults(outputObject) {
     let buyerEmail = document.getElementById('email-address').value;
     
     let term = document.getElementById('loan-term').value;
-    let remainingBalance = +(convertToCurrency(outputObject.remainingBalance)).toFixed();
     
     if(buyerName.length > 0) {
         emailBody += "Name: " + buyerName + "%0D%0A";
@@ -74,7 +73,7 @@ function updateEmailResults(outputObject) {
         emailBody += "Appreciation: $" + convertToCurrency(outputObject.appreciation) + "%0D%0A";
         emailBody += "Total Years: " + outputObject.numOfYears + "%0D%0A";
         emailBody += "Estimated Value: $" + convertToCurrency(outputObject.estimatedValue) + "%0D%0A";
-        emailBody += "Remaining Balance: $" + remainingBalance + "%0D%0A";
+        emailBody += "Remaining Balance: $" + convertToCurrency(outputObject.remainingBalance.toFixed(2)) + "%0D%0A";
         emailBody += "Equity: $" + convertToCurrency(outputObject.equity) + "%0D%0A";
     
     emailResultsLink.href = "mailto:edlang@edlang.com?subject=" + emailSubject + "&body=" + emailBody;
