@@ -25,7 +25,7 @@ function calculate() {
     let emailSubject = "Home Purchase Scenario";
     let emailBody = "Home Purchase Scenario\n\n" + outputObject;
     
-    emailResultsLink.href += ("?subject=" + emailSubject + "&body=" = emailBody);
+    emailResultsLink.href = emailResultsLink.href + "?subject=" + emailSubject + "&body=" = emailBody;
     emailResults.disabled = false;
     
     console.log(emailSubject);
