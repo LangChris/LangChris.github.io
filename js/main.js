@@ -40,7 +40,6 @@ function updateEmailResults() {
     
     let buyerEmail = document.getElementById('email-address').value;
     
-    let interestRate = document.getElementById('interest-rate').value.toFixed(2) + '%';
     let term = document.getElementById('loan-term').value;
     
     if(buyerName.length > 0) {
@@ -56,8 +55,8 @@ function updateEmailResults() {
     }
     
     emailBody += "Sales Price: " + "$" + convertToCurrency(outputObject.salesPrice) + "%0D%0A";
-    emailBody += "Loan Term: " + term + "%0D%0A";
-    emailBody += "Interest Rate: " + interestRate + "%0D%0A";
+    emailBody += "Loan Term: " + outputObject.term + " Years" + "%0D%0A";
+    emailBody += "Interest Rate: " + outputObject.interestRate + "%" + "%0D%0A";
     emailBody += "Down Payment: " + "$" + convertToCurrency(outputObject.downPayment) + "%0D%0A";
     emailBody += "Loan Amount: " + "$" + convertToCurrency(outputObject.loanAmount) + "%0D%0A";
     emailBody += "PI (Principal & Interest): " + "$" + convertToCurrency(outputObject.pi) + "%0D%0A";
@@ -69,7 +68,7 @@ function updateEmailResults() {
     emailBody += "PITI Monthly: " + "$" + convertToCurrency(outputObject.piTi) + "%0D%0A";
     emailBody += "Yearly Appreciation: " + (outputObject.yearlyAppreciation * 100) + "%" + "%0D%0A";
     emailBody += "Appreciation: " + "$" + convertToCurrency(outputObject.appreciation) + "%0D%0A";
-    emailBody += "Total Years: " + "$" + convertToCurrency(outputObject.numOfYears) + "%0D%0A";
+    emailBody += "Total Years: " + outputObject.numOfYears + " Years" + "%0D%0A";
     emailBody += "Estimated Value: " + "$" + convertToCurrency(outputObject.estimatedValue) + "%0D%0A";
     emailBody += "Remaining Balance: " + "$" + convertToCurrency(outputObject.remainingBalance) + "%0D%0A";
     emailBody += "Equity: " + "$" + convertToCurrency(outputObject.equity) + "%0D%0A";
