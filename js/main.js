@@ -19,21 +19,64 @@ function calculate() {
     document.getElementById('remaining-balance').value = '$' + convertToCurrency(outputObject.remainingBalance.toFixed(2));
     document.getElementById('equity').value = '$' + convertToCurrency(outputObject.equity);
     
+    
+    //Update Email Results
+    updateEmailResults();
+}    
+
+function updateEmailResults() {
     let emailResults = document.getElementById('email-results');
     let emailResultsLink = document.getElementById('email-results-link');
     
     let emailSubject = "Home Purchase Scenario";
     let emailBody = "Home Purchase Scenario%0D%0A%0D%0A";
-    emailBody += "Sales Price: " + outputObject.salesPrice;
     
+    let buyerName = document.getElementById('buyer-name').value;
+    
+    let subjectProperty = document.getElementById('subject-property').value;
+    let subjectPropertyCity = document.getElementById('subject-property-city').value;
+    let subjectPropertyState = document.getElementById('subject-property-state').value;
+    let subjectPropertyZip = document.getElementById('subject-property-zip').value;
+    
+    let buyerEmail = document.getElementById('email-address').value;
+    
+    let interestRate = document.getElementById('interest-rate').value.toFixed(2) + '%';
+    let term = document.getElementById('loan-term').value;
+    
+    if(buyerName.length > 0) {
+        emailBody += "Name: " + buyerName + "%0D%0A";
+    }
+    
+    if(buyerEmail.length > 0) {
+        emailBody += "Email: " + buyerEmail + "%0D%0A";
+    }
+    
+    if(subjectProperty.length > 0) {
+        emailBody += "Subject Property: " + subjectProperty + " " + subjectPropertyCity + ", " + subjectPropertyState + " " + subjectPropertyZip + "%0D%0A";
+    }
+    
+    emailBody += "Sales Price: " + "$" + convertToCurrency(outputObject.salesPrice) + "%0D%0A";
+    emailBody += "Loan Term: " + term + "%0D%0A";
+    emailBody += "Interest Rate: " + interestRate + "%0D%0A";
+    emailBody += "Down Payment: " + "$" + convertToCurrency(outputObject.downPayment) + "%0D%0A";
+    emailBody += "Loan Amount: " + "$" + convertToCurrency(outputObject.loanAmount) + "%0D%0A";
+    emailBody += "PI (Principal & Interest): " + "$" + convertToCurrency(outputObject.pi) + "%0D%0A";
+    emailBody += "Taxes/Year: " + "$" + convertToCurrency(outputObject.taxesPerYear) + "%0D%0A";
+    emailBody += "Taxes/Month: " + "$" + convertToCurrency(outputObject.taxesPerMonth) + "%0D%0A";
+    emailBody += "Insurance/Month: " + "$" + convertToCurrency(outputObject.insurance) + "%0D%0A";
+    emailBody += "Mortgage Insurance/Month: " + "$" + convertToCurrency(outputObject.mortgageInsurance) + "%0D%0A";
+    emailBody += "HOA or Condo Fee: " + "$" + convertToCurrency(outputObject.hoaFee) + "%0D%0A";
+    emailBody += "PITI Monthly: " + "$" + convertToCurrency(outputObject.piTi) + "%0D%0A";
+    emailBody += "Yearly Appreciation: " + +(outputObject.yearlyAppreciation * 100).toFixed(2) + "%" + "%0D%0A";
+    emailBody += "Appreciation: " + "$" + convertToCurrency(outputObject.appreciation) + "%0D%0A";
+    emailBody += "Total Years: " + "$" + convertToCurrency(outputObject.numOfYears) + "%0D%0A";
+    emailBody += "Estimated Value: " + "$" + convertToCurrency(outputObject.estimatedValue) + "%0D%0A";
+    emailBody += "Remaining Balance: " + "$" + convertToCurrency(outputObject.remainingBalance) + "%0D%0A";
+    emailBody += "Equity: " + "$" + convertToCurrency(outputObject.equity) + "%0D%0A";
     
     emailResultsLink.href = "mailto:edlang@edlang.com?subject=" + emailSubject + "&body=" + emailBody;
     emailResults.disabled = false;
-    
-    console.log(emailSubject);
-    console.log(emailBody);
-    console.log(emailResultsLink);
-}    
+}
 
 function updateInterestRate(event) {
     let value = event.target.options[event.target.options.selectedIndex].value;
