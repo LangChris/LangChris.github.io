@@ -21,10 +21,10 @@ function calculate() {
     
     
     //Update Email Results
-    updateEmailResults();
+    updateEmailResults(outputObject);
 }    
 
-function updateEmailResults() {
+function updateEmailResults(outputObject) {
     let emailResults = document.getElementById('email-results');
     let emailResultsLink = document.getElementById('email-results-link');
     
