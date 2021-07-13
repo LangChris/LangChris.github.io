@@ -58,7 +58,7 @@ function updateEmailResults(outputObject) {
     }
     
       emailBody += "Sales Price: $" + convertToCurrency(outputObject.salesPrice) + "%0D%0A";
-//    emailBody += "Loan Term:" + outputObject.term + " Years" + "%0D%0A";
+      emailBody += "Loan Term (Years): " + outputObject.term + "%0D%0A";
 //    emailBody += "Interest Rate:%" + outputObject.interestRate + "%0D%0A";
 //    emailBody += "Down Payment: " + "$" + convertToCurrency(outputObject.downPayment) + "%0D%0A";
 //    emailBody += "Loan Amount: " + "$" + convertToCurrency(outputObject.loanAmount) + "%0D%0A";
