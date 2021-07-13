@@ -57,7 +57,7 @@ function updateEmailResults(outputObject) {
         emailBody += "Zip: " + subjectPropertyZip + "%0D%0A";
     }
     
-//    emailBody += "Sales Price:$" + convertToCurrency(outputObject.salesPrice) + "%0D%0A";
+      emailBody += "Sales Price: $" + convertToCurrency(outputObject.salesPrice) + "%0D%0A";
 //    emailBody += "Loan Term:" + outputObject.term + " Years" + "%0D%0A";
 //    emailBody += "Interest Rate:%" + outputObject.interestRate + "%0D%0A";
 //    emailBody += "Down Payment: " + "$" + convertToCurrency(outputObject.downPayment) + "%0D%0A";
