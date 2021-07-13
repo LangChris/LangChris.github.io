@@ -23,7 +23,9 @@ function calculate() {
     let emailResultsLink = document.getElementById('email-results-link');
     
     let emailSubject = "Home Purchase Scenario";
-    let emailBody = "Home Purchase Scenario%0D%0A%0D%0A" + "Sales Price: " + outputObject.salesPrice
+    let emailBody = "Home Purchase Scenario%0D%0A%0D%0A";
+    emailBody += "Sales Price: " + outputObject.salesPrice;
+    
     
     emailResultsLink.href = "mailto:edlang@edlang.com?subject=" + emailSubject + "&body=" + emailBody;
     emailResults.disabled = false;
