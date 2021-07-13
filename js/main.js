@@ -26,8 +26,12 @@ function calculate() {
     let emailBody = "Home Purchase Scenario\n\n" + 
         outputObject
     
-    emailResultsLink.href += "?subject=" + emailSubject + "&body=" = emailBody;
+    emailResultsLink.href += ("?subject=" + emailSubject + "&body=" = emailBody);
     emailResults.disabled = false;
+    
+    console.log(emailSubject);
+    console.log(emailBody);
+    console.log(emailResultsLink);
 }    
 
 function updateInterestRate(event) {
