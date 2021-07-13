@@ -23,8 +23,7 @@ function calculate() {
     let emailResultsLink = document.getElementById('email-results-link');
     
     let emailSubject = "Home Purchase Scenario";
-    let emailBody = "Home Purchase Scenario\n\n" + 
-        outputObject
+    let emailBody = "Home Purchase Scenario\n\n" + outputObject;
     
     emailResultsLink.href += ("?subject=" + emailSubject + "&body=" = emailBody);
     emailResults.disabled = false;
