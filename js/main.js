@@ -62,7 +62,7 @@ function updateEmailResults(outputObject) {
         emailBody += "Interest Rate (Percent): " + outputObject.interestRate + "%0D%0A";
         emailBody += "Down Payment: $" + convertToCurrency(outputObject.downPayment) + "%0D%0A";
         emailBody += "Loan Amount: $" + convertToCurrency(outputObject.loanAmount) + "%0D%0A";
-        emailBody += "PI (Principal & Interest): $" + convertToCurrency(outputObject.pi) + "%0D%0A";
+        emailBody += "PI (Principal + Interest): $" + convertToCurrency(outputObject.pi) + "%0D%0A";
         emailBody += "Taxes/Year: $" + convertToCurrency(outputObject.taxesPerYear) + "%0D%0A";
         emailBody += "Taxes/Month: $" + convertToCurrency(outputObject.taxesPerMonth) + "%0D%0A";
         emailBody += "Insurance/Month: $" + convertToCurrency(outputObject.insurance) + "%0D%0A";
