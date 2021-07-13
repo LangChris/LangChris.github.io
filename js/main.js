@@ -19,7 +19,15 @@ function calculate() {
     document.getElementById('remaining-balance').value = '$' + convertToCurrency(outputObject.remainingBalance.toFixed(2));
     document.getElementById('equity').value = '$' + convertToCurrency(outputObject.equity);
     
-    document.getElementById('email-results').disabled = false;
+    let emailResults = document.getElementById('email-results');
+    let emailResultsLink = document.getElementById('email-results-link');
+    
+    let emailSubject = "Home Purchase Scenario";
+    let emailBody = "Home Purchase Scenario\n\n" + 
+        outputObject
+    
+    emailResultsLink.href += "?subject=" + emailSubject + "&body=" = emailBody;
+    emailResults.disabled = false;
 }    
 
 function updateInterestRate(event) {
