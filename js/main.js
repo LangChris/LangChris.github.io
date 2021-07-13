@@ -67,7 +67,7 @@ function updateEmailResults() {
     emailBody += "Mortgage Insurance/Month: " + "$" + convertToCurrency(outputObject.mortgageInsurance) + "%0D%0A";
     emailBody += "HOA or Condo Fee: " + "$" + convertToCurrency(outputObject.hoaFee) + "%0D%0A";
     emailBody += "PITI Monthly: " + "$" + convertToCurrency(outputObject.piTi) + "%0D%0A";
-    emailBody += "Yearly Appreciation: " + +(outputObject.yearlyAppreciation * 100).toFixed(2) + "%" + "%0D%0A";
+    emailBody += "Yearly Appreciation: " + (outputObject.yearlyAppreciation * 100) + "%" + "%0D%0A";
     emailBody += "Appreciation: " + "$" + convertToCurrency(outputObject.appreciation) + "%0D%0A";
     emailBody += "Total Years: " + "$" + convertToCurrency(outputObject.numOfYears) + "%0D%0A";
     emailBody += "Estimated Value: " + "$" + convertToCurrency(outputObject.estimatedValue) + "%0D%0A";
