@@ -45,7 +45,7 @@
                     <table id="price-info">
                         <tr>
                             <th>Sales Price:</th>
-                            <td><input id="sales-price" type="text" class="med" placeholder="$500,000" title="Enter sales price here" /></td>
+                            <td><input oninput="toggleCalculateButton(event)" id="sales-price" type="text" class="med" placeholder="$500,000" title="Enter sales price here" /></td>
                         </tr>
                         <tr>
                             <th>HOA or Condo Fee:</th>
@@ -62,7 +62,7 @@
                             <th>Total Years:</th>
                             <td>
                                 <input id="total-years" type="range" value=5 min=1 max=30 step=1 oninput="updateTotalYearsLabel(event)" />
-                                <span id="total-years-label" class="range-label">5 years</span>
+                                <span id="total-years-label" class="range-label">5 Years</span>
                             </td>
                         </tr>
                     </table>
@@ -70,23 +70,29 @@
                 <div class="half-section">
                     <table class="right" id="loan-info">
                         <tr>
-                            <th>Loan Type:</th>
+                            <th>Loan Term:</th>
                             <td>
-                                <select id="loan-type" onchange="updateInterestRate(event)">
+                                <select id="loan-term" class="med-sm">
                                     <option value="30" selected>30 Yr. Fixed</option>
-                                    <option value="15">15 Yr. Fixed</option>
+                                    <option value"15">15 Yr. Fixed</option>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <th>Interest Rate:</th>
-                            <td><input id="interest-rate" type="text" class="med-sm" value="2.75%" /></td>
+                            <td>
+                                <input id="interest-rate" type="range" value=2.75 min=2.25 max=4.75 step=.125 oninput="updateInterestRateLabel(event)" />
+                                <span id="interest-rate-label" class="range-label">2.750%</span>
+                            </td>
                         </tr>
                     </table>
                 </div>
             </div>
             <div class="section">
-                <button onclick="calculate();">Calculate</button>
+                <div class="buttons">
+                    <button disabled="true" id="calculate" onclick="calculate();">Calculate</button>
+                    <a href="mailto:edlang@edlang.com?subject=test&body=test"><button disabled="true" id="email-results">Email Results</button></a>
+                </div>
                 <div class="half-section">
                     <table>
                         <tr>

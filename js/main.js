@@ -18,6 +18,8 @@ function calculate() {
     document.getElementById('estimated-value').value = '$' + convertToCurrency(outputObject.estimatedValue);
     document.getElementById('remaining-balance').value = '$' + convertToCurrency(outputObject.remainingBalance.toFixed(2));
     document.getElementById('equity').value = '$' + convertToCurrency(outputObject.equity);
+    
+    document.getElementById('email-results').disabled = false;
 }    
 
 function updateInterestRate(event) {
@@ -34,7 +36,7 @@ function updateTotalYearsLabel(event) {
     let value = event.target.value;
     let totalYearsLabel = document.getElementById('total-years-label');
 
-    totalYearsLabel.innerHTML = value + ' years';
+    totalYearsLabel.innerHTML = value + ' Year' + (value > 1 ? 's' : '');
 }
 
 function updatePercentDownLabel(event) {
@@ -43,13 +45,31 @@ function updatePercentDownLabel(event) {
 
     percentDownLabel.innerHTML = value + '%';
 }
+
+function updateInterestRateLabel(event) {
+    let value = event.target.value;
+    let interestRateLabel = document.getElementById('interest-rate-label');
+
+    interestRateLabel.innerHTML = (value.length == 4 ? (value + '0') : value.length == 3 ? (value + '00') : value.length == 1 ? (value + '.000') : value) + '%';
+}
+
+function toggleCalculateButton(event) {
+    let salesPrice = event.target.value;
+    let calculateButton = document.getElementById('calculate');
+    
+    if(salesPrice.length > 0) {
+        calculateButton.disabled = false;
+    } else {
+        calculateButton.disabled = true;
+    }
+}
         
 function getInputObject() {
     let salesPrice = document.getElementById('sales-price').value;
     let percentDown = document.getElementById('percent-down').value;
     let numOfYears = document.getElementById('total-years').value;
     let interestRate = document.getElementById('interest-rate').value;
-    let term = document.getElementById('loan-type').value;
+    let term = document.getElementById('loan-term').value;
     let hoaFee = document.getElementById('hoa-fee').value;
     let numOfPayments = 12 * +term;
     salesPrice = salesPrice.replace('$', '');
