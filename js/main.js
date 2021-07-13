@@ -43,23 +43,23 @@ function updateEmailResults(outputObject) {
     let term = document.getElementById('loan-term').value;
     
     if(buyerName.length > 0) {
-        emailBody += "Name:" + buyerName + "%0D%0A";
+        emailBody += "Name: " + buyerName + "%0D%0A";
     }
     
     if(buyerEmail.length > 0) {
-        emailBody += "Email:" + buyerEmail + "%0D%0A";
+        emailBody += "Email: " + buyerEmail + "%0D%0A";
     }
     
     if(subjectProperty.length > 0) {
-        emailBody += "Address:" + subjectProperty + "%0D%0A";
-        emailBody += "City:" + subjectPropertyCity + "%0D%0A";
-        emailBody += "State:" + subjectPropertyState + "%0D%0A";
-        emailBody += "Zip:" + subjectPropertyZip + "%0D%0A";
+        emailBody += "Address: " + subjectProperty + "%0D%0A";
+        emailBody += "City: " + subjectPropertyCity + "%0D%0A";
+        emailBody += "State: " + subjectPropertyState + "%0D%0A";
+        emailBody += "Zip: " + subjectPropertyZip + "%0D%0A";
     }
     
-    emailBody += "Sales Price:$" + convertToCurrency(outputObject.salesPrice) + "%0D%0A";
-    emailBody += "Loan Term:" + outputObject.term + " Years" + "%0D%0A";
-    emailBody += "Interest Rate:%" + outputObject.interestRate + "%0D%0A";
+//    emailBody += "Sales Price:$" + convertToCurrency(outputObject.salesPrice) + "%0D%0A";
+//    emailBody += "Loan Term:" + outputObject.term + " Years" + "%0D%0A";
+//    emailBody += "Interest Rate:%" + outputObject.interestRate + "%0D%0A";
 //    emailBody += "Down Payment: " + "$" + convertToCurrency(outputObject.downPayment) + "%0D%0A";
 //    emailBody += "Loan Amount: " + "$" + convertToCurrency(outputObject.loanAmount) + "%0D%0A";
 //    emailBody += "PI (Principal & Interest): " + "$" + convertToCurrency(outputObject.pi) + "%0D%0A";
