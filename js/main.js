@@ -13,12 +13,13 @@ function calculate() {
     document.getElementById('hoa-fee-value').value = '$' + convertToCurrency(outputObject.hoaFee);
     document.getElementById('pi-ti').value = '$' + convertToCurrency(outputObject.piTi);
     document.getElementById('yearly-appreciation').value = +(outputObject.yearlyAppreciation * 100).toFixed(2) + '%';
-    document.getElementById('appreciation').value = '$' + convertToCurrency(outputObject.appreciation);
     document.getElementById('total-years-value').value = outputObject.numOfYears;
     document.getElementById('estimated-value').value = '$' + convertToCurrency(outputObject.estimatedValue);
     document.getElementById('remaining-balance').value = '$' + convertToCurrency(outputObject.remainingBalance.toFixed(2));
     document.getElementById('equity').value = '$' + convertToCurrency(outputObject.equity);
     
+    document.getElementById('scenario-results').innerHTML = "In the above scenario, your initial investment of $" + convertToCurrency(outputObject.downPayment) + " over a period of " + outputObject.numOfYears + 
+    " years will become $" + convertToCurrency(outputObject.equity) + " of Home Equity.";
     
     //Update Email Results
     updateEmailResults(outputObject);
@@ -70,7 +71,6 @@ function updateEmailResults(outputObject) {
         emailBody += "HOA or Condo Fee: $" + convertToCurrency(outputObject.hoaFee) + "%0D%0A";
         emailBody += "PITI Monthly: $" + convertToCurrency(outputObject.piTi) + "%0D%0A";
         emailBody += "Yearly Appreciation (Percent): " + (outputObject.yearlyAppreciation * 100) + "%0D%0A";
-        emailBody += "Appreciation: $" + convertToCurrency(outputObject.appreciation) + "%0D%0A";
         emailBody += "Total Years: " + outputObject.numOfYears + "%0D%0A";
         emailBody += "Estimated Value: $" + convertToCurrency(outputObject.estimatedValue) + "%0D%0A";
         emailBody += "Remaining Balance: $" + convertToCurrency(outputObject.remainingBalance.toFixed(2)) + "%0D%0A";
@@ -155,7 +155,6 @@ function getOutputObject(inputObject) {
     let pi = +PMT(inputObject.interestRate/12,inputObject.numOfPayments, loanAmount).toFixed(2);
     let taxesPerYear = +(inputObject.salesPrice * constants.yearlyTaxesRate).toFixed(2);
     let taxesPerMonth = +(taxesPerYear / 12).toFixed(2);
-    let appreciation = +(inputObject.salesPrice * constants.yearlyAppreciation).toFixed(2);
     
     let estimatedValue = +(inputObject.salesPrice * Math.pow(1 + constants.yearlyAppreciation, inputObject.numOfYears)).toFixed(2);
     let remainingBalance = +REMBAL(pi, inputObject.interestRate/12, inputObject.numOfPayments - (inputObject.numOfYears * 12));
@@ -178,7 +177,6 @@ function getOutputObject(inputObject) {
         taxesPerYear: taxesPerYear,
         taxesPerMonth: taxesPerMonth,
         piTi: piTi,
-        appreciation: appreciation,
         estimatedValue: estimatedValue,
         remainingBalance: remainingBalance,
         equity: equity,
