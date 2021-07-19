@@ -53,8 +53,17 @@ function updateEmailResults(outputObject) {
     
     if(subjectProperty.length > 0) {
         emailBody += "Address: " + subjectProperty + "%0D%0A";
+    }
+    
+    if(subjectPropertyCity.length > 0) {
         emailBody += "City: " + subjectPropertyCity + "%0D%0A";
+    }
+    
+    if(subjectPropertyState.length > 0) {
         emailBody += "State: " + subjectPropertyState + "%0D%0A";
+    }
+    
+    if(subjectPropertyZip.length > 0) {
         emailBody += "Zip: " + subjectPropertyZip + "%0D%0A";
     }
     
