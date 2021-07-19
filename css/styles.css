@@ -27,7 +27,7 @@ body { background: #fff; }
     display: block;
     margin: 0 auto;
     padding: 10px;
-    width: 180px;
+    width: max-content;
 }
 
 button{
@@ -67,6 +67,15 @@ input {
 .centered-tbl {
     margin: 0 auto;
     padding: 10px;
+}
+
+.centered-tbl td {
+    padding: 10px;
+}
+
+.table-header {
+    color: #003497;
+    font-size: 15px;
 }
 
 h2 {
