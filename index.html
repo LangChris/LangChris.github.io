@@ -85,6 +85,13 @@
                                 <span id="interest-rate-label" class="range-label">2.750%</span>
                             </td>
                         </tr>
+                        <tr>
+                            <th>Yearly Appreciation:</th>
+                            <td>
+                                <input id="yearly-appreciation" type="range" value=2.50 min=1.0 max=10.0 step=.5 oninput="updateYearlyAppreciationLabel(event)" />
+                                <span id="yearly-appreciation-label" class="range-label">2.5%</span>
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -120,6 +127,14 @@
                             <td><input id="taxes-per-month" type="text" class="lrg readonly" readonly /></td>
                         </tr>
                         <tr>
+                            <th>HOA or Condo Fee:</th>
+                            <td><input id="hoa-fee-value" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="half-section">
+                    <table>
+                        <tr>
                             <th>Insurance /Month:</th>
                             <td><input id="insurance" type="text" class="lrg readonly" readonly /></td>
                         </tr>
@@ -127,21 +142,9 @@
                             <th>Mortgage Insurance /Month:</th>
                             <td><input id="mortgage-insurance" type="text" class="lrg readonly" readonly /></td>
                         </tr>
-                    </table>
-                </div>
-                <div class="half-section">
-                    <table>
-                        <tr>
-                            <th>HOA or Condo Fee:</th>
-                            <td><input id="hoa-fee-value" type="text" class="lrg readonly" readonly /></td>
-                        </tr>
                         <tr>
                             <th>PITI Monthly:</th>
                             <td><input id="pi-ti" type="text" class="lrg readonly" readonly /></td>
-                        </tr>
-                        <tr>
-                            <th>Yearly Appreciation %:</th>
-                            <td><input id="yearly-appreciation" type="text" class="lrg readonly" readonly /></td>
                         </tr>
                         <tr>
                             <th>Total Years:</th>

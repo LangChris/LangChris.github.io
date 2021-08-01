@@ -12,7 +12,6 @@ function calculate() {
     document.getElementById('mortgage-insurance').value = '$' + convertToCurrency(outputObject.mortgageInsurance);
     document.getElementById('hoa-fee-value').value = '$' + convertToCurrency(outputObject.hoaFee);
     document.getElementById('pi-ti').value = '$' + convertToCurrency(outputObject.piTi);
-    document.getElementById('yearly-appreciation').value = +(outputObject.yearlyAppreciation * 100).toFixed(2) + '%';
     document.getElementById('total-years-value').value = outputObject.numOfYears;
     document.getElementById('estimated-value').value = '$' + convertToCurrency(outputObject.estimatedValue);
     document.getElementById('remaining-balance').value = '$' + convertToCurrency(outputObject.remainingBalance.toFixed(2));
@@ -120,6 +119,13 @@ function updateInterestRateLabel(event) {
     interestRateLabel.innerHTML = (value.length == 4 ? (value + '0') : value.length == 3 ? (value + '00') : value.length == 1 ? (value + '.000') : value) + '%';
 }
 
+function updateYearlyAppreciationLabel(event) {
+    let value = event.target.value;
+    let yearlyAppreciationLabel = document.getElementById('yearly-appreciation-label');
+
+    yearlyAppreciationLabel.innerHTML = (value.length == 1 ? (value + '.0') : value) + '%';
+}
+
 function toggleCalculateButton(event) {
     let salesPrice = event.target.value;
     let calculateButton = document.getElementById('calculate');
@@ -136,6 +142,7 @@ function getInputObject() {
     let percentDown = document.getElementById('percent-down').value;
     let numOfYears = document.getElementById('total-years').value;
     let interestRate = document.getElementById('interest-rate').value;
+    let yearlyAppreciation = document.getElementById('yearly-appreciation').value;
     let term = document.getElementById('loan-term').value;
     let hoaFee = document.getElementById('hoa-fee').value;
     let numOfPayments = 12 * +term;
@@ -152,7 +159,8 @@ function getInputObject() {
         numOfYears: +numOfYears,
         interestRate: +interestRate / 100,
         term: +term,
-        numOfPayments: +numOfPayments
+        numOfPayments: +numOfPayments,
+        yearlyAppreciation: +yearlyAppreciation / 100
     };
 }
 
@@ -165,7 +173,7 @@ function getOutputObject(inputObject) {
     let taxesPerYear = +(inputObject.salesPrice * constants.yearlyTaxesRate).toFixed(2);
     let taxesPerMonth = +(taxesPerYear / 12).toFixed(2);
     
-    let estimatedValue = +(inputObject.salesPrice * Math.pow(1 + constants.yearlyAppreciation, inputObject.numOfYears)).toFixed(2);
+    let estimatedValue = +(inputObject.salesPrice * Math.pow(1 + inputObject.yearlyAppreciation, inputObject.numOfYears)).toFixed(2);
     let remainingBalance = +REMBAL(pi, inputObject.interestRate/12, inputObject.numOfPayments - (inputObject.numOfYears * 12));
     let equity = +(estimatedValue - remainingBalance).toFixed(2);
     let insurance = +((inputObject.salesPrice * constants.insuranceRate) / 12).toFixed(2);
@@ -217,8 +225,7 @@ function REMBAL(pmt, i, n) {
 function getConstantVariables() {
     return {
         insuranceRate: 0.002,
-        yearlyTaxesRate: 0.01,
-        yearlyAppreciation: .02
+        yearlyTaxesRate: 0.01
     };
 }
 
