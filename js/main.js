@@ -25,12 +25,11 @@ function calculate() {
 }    
 
 function updateEmailResults(outputObject) {
-    // New Line Characters: %0D%0A
     let emailResults = document.getElementById('email-results');
     let emailResultsLink = document.getElementById('email-results-link');
     
     let emailSubject = "Home Purchase Scenario";
-    let emailBody = "Home Purchase Scenario\n \n";
+    let emailBody = "Home Purchase Scenario%0D%0A %0D%0A";
     
     let buyerName = document.getElementById('buyer-name').value;
     
@@ -44,46 +43,46 @@ function updateEmailResults(outputObject) {
     let term = document.getElementById('loan-term').value;
     
     if(buyerName.length > 0) {
-        emailBody += "Name: " + buyerName + "\n";
+        emailBody += "Name: " + buyerName + "%0D%0A";
     }
     
     if(buyerEmail.length > 0) {
-        emailBody += "Email: " + buyerEmail + "\n";
+        emailBody += "Email: " + buyerEmail + "%0D%0A";
     }
     
     if(subjectProperty.length > 0) {
-        emailBody += "Address: " + subjectProperty + "\n";
+        emailBody += "Address: " + subjectProperty + "%0D%0A";
     }
     
     if(subjectPropertyCity.length > 0) {
-        emailBody += "City: " + subjectPropertyCity + "\n";
+        emailBody += "City: " + subjectPropertyCity + "%0D%0A";
     }
     
     if(subjectPropertyState.length > 0) {
-        emailBody += "State: " + subjectPropertyState + "\n";
+        emailBody += "State: " + subjectPropertyState + "%0D%0A";
     }
     
     if(subjectPropertyZip.length > 0) {
-        emailBody += "Zip: " + subjectPropertyZip + "\n";
+        emailBody += "Zip: " + subjectPropertyZip + "%0D%0A";
     }
     
-        emailBody += "Sales Price: $" + convertToCurrency(outputObject.salesPrice) + "\n";
-        emailBody += "Loan Term (Years): " + outputObject.term + "\n";
-        emailBody += "Interest Rate (Percent): " + (outputObject.interestRate * 100) + "\n";
-        emailBody += "Down Payment: $" + convertToCurrency(outputObject.downPayment) + "\n";
-        emailBody += "Loan Amount: $" + convertToCurrency(outputObject.loanAmount) + "\n";
-        emailBody += "PI (Principal + Interest): $" + convertToCurrency(outputObject.pi) + "\n";
-        emailBody += "Taxes/Year: $" + convertToCurrency(outputObject.taxesPerYear) + "\n";
-        emailBody += "Taxes/Month: $" + convertToCurrency(outputObject.taxesPerMonth) + "\n";
-        emailBody += "Insurance/Month: $" + convertToCurrency(outputObject.insurance) + "\n";
-        emailBody += "Mortgage Insurance/Month: $" + convertToCurrency(outputObject.mortgageInsurance) + "\n";
-        emailBody += "HOA or Condo Fee: $" + convertToCurrency(outputObject.hoaFee) + "\n";
-        emailBody += "PITI Monthly: $" + convertToCurrency(outputObject.piTi) + "\n";
-        emailBody += "Yearly Appreciation (Percent): " + (outputObject.yearlyAppreciation * 100) + "\n";
-        emailBody += "Total Years: " + outputObject.numOfYears + "\n";
-        emailBody += "Estimated Value: $" + convertToCurrency(outputObject.estimatedValue) + "\n";
-        emailBody += "Remaining Balance: $" + convertToCurrency(outputObject.remainingBalance.toFixed(2)) + "\n";
-        emailBody += "Estimated Home Equity: $" + convertToCurrency(outputObject.equity) + "\n";
+        emailBody += "Sales Price: $" + convertToCurrency(outputObject.salesPrice) + "%0D%0A";
+        emailBody += "Loan Term (Years): " + outputObject.term + "%0D%0A";
+        emailBody += "Interest Rate (Percent): " + (outputObject.interestRate * 100) + "%0D%0A";
+        emailBody += "Down Payment: $" + convertToCurrency(outputObject.downPayment) + "%0D%0A";
+        emailBody += "Loan Amount: $" + convertToCurrency(outputObject.loanAmount) + "%0D%0A";
+        emailBody += "PI (Principal + Interest): $" + convertToCurrency(outputObject.pi) + "%0D%0A";
+        emailBody += "Taxes/Year: $" + convertToCurrency(outputObject.taxesPerYear) + "%0D%0A";
+        emailBody += "Taxes/Month: $" + convertToCurrency(outputObject.taxesPerMonth) + "%0D%0A";
+        emailBody += "Insurance/Month: $" + convertToCurrency(outputObject.insurance) + "%0D%0A";
+        emailBody += "Mortgage Insurance/Month: $" + convertToCurrency(outputObject.mortgageInsurance) + "%0D%0A";
+        emailBody += "HOA or Condo Fee: $" + convertToCurrency(outputObject.hoaFee) + "%0D%0A";
+        emailBody += "PITI Monthly: $" + convertToCurrency(outputObject.piTi) + "%0D%0A";
+        emailBody += "Yearly Appreciation (Percent): " + (outputObject.yearlyAppreciation * 100) + "%0D%0A";
+        emailBody += "Total Years: " + outputObject.numOfYears + "%0D%0A";
+        emailBody += "Estimated Value: $" + convertToCurrency(outputObject.estimatedValue) + "%0D%0A";
+        emailBody += "Remaining Balance: $" + convertToCurrency(outputObject.remainingBalance.toFixed(2)) + "%0D%0A";
+        emailBody += "Estimated Home Equity: $" + convertToCurrency(outputObject.equity) + "%0D%0A";
     
     emailResultsLink.href = "mailto:edlang@edlang.com?subject=" + emailSubject + "&body=" + emailBody;
     emailResults.disabled = false;
