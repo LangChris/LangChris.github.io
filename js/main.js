@@ -84,6 +84,18 @@ function updateEmailResults(outputObject) {
         emailBody += "Remaining Balance: $" + convertToCurrency(outputObject.remainingBalance.toFixed(2)) + "%0D%0A";
         emailBody += "Estimated Home Equity: $" + convertToCurrency(outputObject.equity) + "%0D%0A";
     
+        emailBody += document.getElementById('scenario-results').innerHTML + "%0D%0A %0D%0A";
+        emailBody += "In addition, you most likely will be eligible for a Significant Tax Savings on the interest and tax portion of your monthly payment.%0D%0A %0D%0A";
+    
+        emailBody += "Consult your tax advisor for details.%0D%0A %0D%0A";
+    
+        emailBody += "THE INFORMATION PROVIDED ABOVE IS ONLY AN ESTIMATE FOR DISCUSSION PURPOSES ONLY%0D%0A";
+        emailBody += "FOR ADDITIONAL INFO PLEASE CONTACT:%0D%0A";
+        emailBody += "Ed Lang - Real Estate Expert%0D%0A";
+        emailBody += "Office: 703.932.5753%0D%0A";
+        emailBody += "Email: edlang@edlang.com%0D%0A";
+        emailBody += "Website: www.edlang.com%0D%0A";
+    
     emailResultsLink.href = "mailto:edlang@edlang.com?subject=" + emailSubject + "&body=" + emailBody;
     emailResults.disabled = false;
 }
