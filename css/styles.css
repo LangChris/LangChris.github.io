@@ -118,7 +118,7 @@ th {
     font-weight: bold;
 }
 
-#scenario-results {
+.results {
     color: #003497;
     font-size: 15px;
     text-align: center;

@@ -16,9 +16,13 @@ function calculate() {
     document.getElementById('estimated-value').value = '$' + convertToCurrency(outputObject.estimatedValue);
     document.getElementById('remaining-balance').value = '$' + convertToCurrency(outputObject.remainingBalance.toFixed(2));
     document.getElementById('equity').value = '$' + convertToCurrency(outputObject.equity);
+    document.getElementById('monthly-tax-savings').value = '$' + convertToCurrency(outputObject.monthlyTaxSavings);
     
     //Update Scenario Results
     updateScenarioResults(outputObject);
+    
+    //Update Tax Results
+    updateTaxResults(outputObject);
     
     //Update Email Results
     updateEmailResults(outputObject);
@@ -27,6 +31,11 @@ function calculate() {
 function updateScenarioResults(outputObject) {
     document.getElementById('scenario-results').innerHTML = "In the above scenario, your initial investment of $" + convertToCurrency(outputObject.downPayment) + " over a period of " + outputObject.numOfYears + 
     " years will become $" + convertToCurrency(outputObject.equity) + " of Home Equity.";
+}
+
+function updateTaxResults(outputObject) {
+    document.getElementById('tax-results').innerHTML = "In addition to Equity building, you most likely will receive an additional $" +
+    convertToCurrency(outputObject.monthlyTaxSavings) +" monthly tax savings.";
 }
 
 function updateEmailResults(outputObject) {
