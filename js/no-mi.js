@@ -16,13 +16,9 @@ function calculate() {
     document.getElementById('estimated-value').value = '$' + convertToCurrency(outputObject.estimatedValue);
     document.getElementById('remaining-balance').value = '$' + convertToCurrency(outputObject.remainingBalance.toFixed(2));
     document.getElementById('equity').value = '$' + convertToCurrency(outputObject.equity);
-    document.getElementById('monthly-tax-savings').value = '$' + convertToCurrency(outputObject.monthlyTaxSavings);
     
     //Update Scenario Results
     updateScenarioResults(outputObject);
-    
-    //Update Tax Results
-    updateTaxResults(outputObject);
     
     //Update Email Results
     updateEmailResults(outputObject);
@@ -31,11 +27,6 @@ function calculate() {
 function updateScenarioResults(outputObject) {
     document.getElementById('scenario-results').innerHTML = "In the above scenario, your initial investment of $" + convertToCurrency(outputObject.downPayment) + " over a period of " + outputObject.numOfYears + 
     " years will become $" + convertToCurrency(outputObject.equity) + " of Home Equity.";
-}
-
-function updateTaxResults(outputObject) {
-    document.getElementById('tax-results').innerHTML = "In addition to Equity building, you most likely will receive an additional $" +
-    convertToCurrency(outputObject.monthlyTaxSavings) +" monthly tax savings.";
 }
 
 function updateEmailResults(outputObject) {
@@ -171,7 +162,6 @@ function getInputObject() {
     let term = document.getElementById('loan-term').value;
     let hoaFee = document.getElementById('hoa-fee').value;
     let numOfPayments = 12 * +term;
-    let taxBracket = document.getElementById('tax-bracket').value;
     salesPrice = salesPrice.replace('$', '');
     salesPrice = salesPrice.replace(',', '');
     hoaFee = hoaFee.replace('$', '');
@@ -186,8 +176,7 @@ function getInputObject() {
         interestRate: +interestRate / 100,
         term: +term,
         numOfPayments: +numOfPayments,
-        yearlyAppreciation: +yearlyAppreciation / 100,
-        taxBracket: +taxBracket;
+        yearlyAppreciation: +yearlyAppreciation / 100
     };
 }
 
@@ -204,17 +193,9 @@ function getOutputObject(inputObject) {
     let remainingBalance = +REMBAL(pi, inputObject.interestRate/12, inputObject.numOfPayments - (inputObject.numOfYears * 12));
     let equity = +(estimatedValue - remainingBalance).toFixed(2);
     let insurance = +((inputObject.salesPrice * constants.insuranceRate) / 12).toFixed(2);
-    let mortgageInsurance;
-    if(inputObject.percentDown >= 0.2) {
-       mortgageInsurance = 0;
-    } else if(inputObject.percentDown < 0.1) {
-       mortgageInsurance = +(.00075 * inputObject.salesPrice).toFixed(2);
-    } else {
-        mortgageInsurance = +(.00041 * inputObject.salesPrice).toFixed(2);
-    }
-    let piTi = +(pi + taxesPerMonth + insurance + mortgageInsurance + inputObject.hoaFee).toFixed(2);
+    let mortgageInsurance = 0;
     
-    let monthlyTaxSavings = +MTS(inputObject.interestRate, pi, loanAmount, inputObject.taxBracket, inputObject.taxesPerYear);
+    let piTi = +(pi + taxesPerMonth + insurance + mortgageInsurance + inputObject.hoaFee).toFixed(2);
     
     let outputObject = {
         downPayment: downPayment,
@@ -227,8 +208,7 @@ function getOutputObject(inputObject) {
         remainingBalance: remainingBalance,
         equity: equity,
         insurance: insurance,
-        mortgageInsurance: mortgageInsurance,
-        monthlyTaxSavings: monthlyTaxSavings
+        mortgageInsurance: mortgageInsurance
     };
     
     Object.assign(outputObject, constants);
@@ -252,34 +232,11 @@ function REMBAL(pmt, i, n) {
     return pmt * ((1 - (1 / Math.pow(1 + i, n))) / i);
 }
 
-function MTS(interestRate, pi, loanAmount, taxBracket, taxesPerYear) {
-    console.log('calculating monthlyTaxSavings...');
-    //Int (t) = interest rate x Loan Balance
-    var interest = interestRate * loanAmount;
-    
-    //Prinicipal (t) = monthly payment - int (t)
-    var principal = pi - interest;
-    
-    //B. Interest portion of the PI and take a percentage of that to give Interest amount per month, multiply that times tax bracket rate = monthly savings
-    var monthlySavings = interest * taxBracket;
-    
-    //C. Taxes per year x your Tax Bracket to give tax paid savings per year
-    var taxPaidSavingsPerYear = taxesPerYear * taxBracket;
-    
-    //B+C  divided by 12 = monthly tax savings
-    var monthlyTaxSavings = (monthlySavings + taxPaidSavingsPerYear) / 12;
-    
-    console.log('Interest: ' + interest);
-    console.log('Monthly Savings: ' + monthlySavings);
-    console.log('Tax Paid Savings/Yr: ' + taxPaidSavingsPerYear);
-    console.log('Monthly Tax Savings: ' + monthlyTaxSavings);
-    return monthlyTaxSavings;
-}
-
 function getConstantVariables() {
     return {
         insuranceRate: 0.002,
-        yearlyTaxesRate: 0.01
+        yearlyTaxesRate: 0.01,
+        monthlyTaxSavings: 100
     };
 }
 

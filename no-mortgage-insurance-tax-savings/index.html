@@ -1,0 +1,216 @@
+<html lang="en">
+    <head>
+        <title>Home Purchase Scenario</title>
+        
+        <link rel="stylesheet" href="../css/styles.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="section" id="header">
+                <div id="logo"></div>
+                <h2>Virginia Home Purchase Scenario</h2>
+            </div>
+            <div class="section">
+                <div class="half-section">
+                    <table id="buyer-info">
+                        <tr>
+                            <th>Buyer Name:</th>
+                            <td><input id="buyer-name" type="text" class="lrg" placeholder="John Doe" title="Enter buyers name here" /></td>
+                        </tr>
+                        <tr>
+                            <th>Subject Property:</th>
+                            <td><input id="subject-property" type="text" class="lrg" placeholder="123 Main St." title="Enter subject property here" /></td>
+                        </tr>
+                        <tr>
+                            <th>City, State, Zip:</th>
+                            <td>
+                                <input id="subject-property-city" type="text" class="med" placeholder="Centreville" title="Enter subject property city here" />
+                                <input id="subject-property-state" type="text" class="sm" placeholder="VA" title="Enter subject property state here" />
+                                <input id="subject-property-zip" type="text" class="sm" placeholder="20120" title="Enter subject property zip here" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="half-section">
+                    <table class="right" id="buyer-info">
+                        <tr>
+                            <th>Email:</th>
+                            <td><input id="email-address" type="text" class="med" placeholder="email@address.com" title="Enter email address here" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="section">
+                <div class="half-section">
+                    <table id="price-info">
+                        <tr>
+                            <th>Sales Price:</th>
+                            <td><input oninput="toggleCalculateButton(event)" id="sales-price" type="text" class="med" placeholder="$500,000" title="Enter sales price here" /></td>
+                        </tr>
+                        <tr>
+                            <th>HOA or Condo Fee:</th>
+                            <td><input id="hoa-fee" type="text" class="med" placeholder="$80" title="Enter hoa or condo fee here" value="$80.00" /></td>
+                        </tr>
+                        <tr>
+                            <th>% Down:</th>
+                            <td>
+                                <input id="percent-down" type="range" value=5 min=0 max=30 step=1 oninput="updatePercentDownLabel(event)" />
+                                <span id="percent-down-label" class="range-label">5%</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Total Years:</th>
+                            <td>
+                                <input id="total-years" type="range" value=5 min=1 max=30 step=1 oninput="updateTotalYearsLabel(event)" />
+                                <span id="total-years-label" class="range-label">5 Years</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="half-section">
+                    <table class="right" id="loan-info">
+                        <tr>
+                            <th>Loan Term:</th>
+                            <td>
+                                <select id="loan-term" class="med-sm">
+                                    <option value="30" selected>30 Yr. Fixed</option>
+                                    <option value="15">15 Yr. Fixed</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Interest Rate:</th>
+                            <td>
+                                <input id="interest-rate" type="range" value=2.75 min=2.25 max=4.75 step=.125 oninput="updateInterestRateLabel(event)" />
+                                <span id="interest-rate-label" class="range-label">2.750%</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Yearly Appreciation:</th>
+                            <td>
+                                <input id="yearly-appreciation" type="range" value=2.50 min=1.0 max=10.0 step=.5 oninput="updateYearlyAppreciationLabel(event)" />
+                                <span id="yearly-appreciation-label" class="range-label">2.5%</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="section">
+                <div class="buttons">
+                    <button disabled="true" id="calculate" onclick="calculate();">Calculate</button>
+                    <a id="email-results-link" href="mailto:edlang@edlang.com" target="_blank"><button disabled="true" id="email-results">Email Results</button></a>
+                </div>
+                <div class="half-section">
+                    <table>
+                        <tr>
+                            <th>Sales Price:</th>
+                            <td><input id="sales-price-value" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Down Payment:</th>
+                            <td><input id="down-payment" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Loan Amount:</th>
+                            <td><input id="loan-amount" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>PI (Principal & Interest):</th>
+                            <td><input id="pi" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Taxes /Year:</th>
+                            <td><input id="taxes-per-year" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Taxes /Month:</th>
+                            <td><input id="taxes-per-month" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>HOA or Condo Fee:</th>
+                            <td><input id="hoa-fee-value" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="half-section">
+                    <table>
+                        <tr>
+                            <th>Insurance /Month:</th>
+                            <td><input id="insurance" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Mortgage Insurance /Month:</th>
+                            <td><input id="mortgage-insurance" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>PITI Monthly:</th>
+                            <td><input id="pi-ti" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Total Years:</th>
+                            <td><input id="total-years-value" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Estimated Value:</th>
+                            <td><input id="estimated-value" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Remaining Balance:</th>
+                            <td><input id="remaining-balance" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                        <tr>
+                            <th>Estimated Home Equity:</th>
+                            <td><input id="equity" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                    </table>
+                </div>
+                <p class="results" id="scenario-results"></p>
+            </div>
+            <div class="section">
+                <p class="lrg-text"><strong>TAX SAVINGS</strong></p>
+                <div class="half-section">
+                    <table id="tax-savings">
+                        <tr>
+                            <th>Tax Bracket:</th>
+                            <td>
+                                <select id="tax-bracket" class="med-sm">
+                                    <option value=".12" selected>12%</option>
+                                    <option value=".22">22%</option>
+                                    <option value=".24">24%</option>
+                                    <option value=".32">32%</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="half-section">
+                    <table class="right" id="tax-savings-results">
+                        <tr>
+                            <th>Monthly Savings:</th>
+                            <td><input id="monthly-tax-savings" type="text" class="lrg readonly" readonly /></td>
+                        </tr>
+                    </table>
+                </div>
+                <p class="results" id="tax-results"></p>
+            </div>
+            <div class="section">
+                <p class="lrg-text"><strong>THE INFORMATION PROVIDED ABOVE IS ONLY AN ESTIMATE FOR DISCUSSION PURPOSES ONLY</strong></p>
+                <p class="lrg-text"><strong>FOR ADDITIONAL INFO PLEASE CONTACT:</strong></p>
+                <table class="centered-tbl">
+                    <tr>
+                        <td></td>
+                        <td>Ed Lang - Real Estate Expert</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong class="table-header">Office: </strong>703.932.5753</td>
+                        <td><strong class="table-header">Email: </strong>edlang@edlang.com</td>
+                        <td><strong class="table-header">Website: </strong>www.edlang.com</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="../js/no-mi-tax.js"></script>
+    </body>
+</html>
