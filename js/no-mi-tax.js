@@ -9,7 +9,6 @@ function calculate() {
     document.getElementById('taxes-per-year').value = '$' + convertToCurrency(outputObject.taxesPerYear);
     document.getElementById('taxes-per-month').value = '$' + convertToCurrency(outputObject.taxesPerMonth);
     document.getElementById('insurance').value = '$' + convertToCurrency(outputObject.insurance);
-    document.getElementById('mortgage-insurance').value = '$' + convertToCurrency(outputObject.mortgageInsurance);
     document.getElementById('hoa-fee-value').value = '$' + convertToCurrency(outputObject.hoaFee);
     document.getElementById('pi-ti').value = '$' + convertToCurrency(outputObject.piTi);
     document.getElementById('total-years-value').value = outputObject.numOfYears;
@@ -89,7 +88,6 @@ function updateEmailResults(outputObject) {
         emailBody += "Taxes/Year: $" + convertToCurrency(outputObject.taxesPerYear) + "%0D%0A";
         emailBody += "Taxes/Month: $" + convertToCurrency(outputObject.taxesPerMonth) + "%0D%0A";
         emailBody += "Insurance/Month: $" + convertToCurrency(outputObject.insurance) + "%0D%0A";
-        emailBody += "Mortgage Insurance/Month: $" + convertToCurrency(outputObject.mortgageInsurance) + "%0D%0A";
         emailBody += "HOA or Condo Fee: $" + convertToCurrency(outputObject.hoaFee) + "%0D%0A";
         emailBody += "PITI Monthly: $" + convertToCurrency(outputObject.piTi) + "%0D%0A";
         emailBody += "Yearly Appreciation (Percent): " + (outputObject.yearlyAppreciation * 100) + "%0D%0A";
